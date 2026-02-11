@@ -5,13 +5,17 @@
 <title>For Baby 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Google Font for cursive accents -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
 <style>
 body {
-  background: radial-gradient(circle at top, #ffb6c1, #ff69b4, #ff1493);
+  margin: 0;
+  padding: 30px;
   font-family: "Times New Roman", serif;
   text-align: center;
   color: white;
-  padding: 30px;
+  background: linear-gradient(160deg, #ffcccb, #ffb6c1, #ff69b4);
   overflow: hidden;
 }
 
@@ -19,6 +23,10 @@ h1 {
   font-size: 3em;
   animation: pulse 2s infinite;
   text-shadow: 0 0 15px rgba(255,255,255,0.6);
+}
+
+h2 {
+  font-family: 'Dancing Script', cursive;
 }
 
 .subtitle {
@@ -95,7 +103,7 @@ button:hover {
   position: absolute;
 }
 
-/* HEART ANIMATIONS */
+/* HEARTS ANIMATION */
 @keyframes floatHearts {
   0% { transform: translateY(0) scale(0.8); opacity: 0; }
   50% { opacity: 1; }
@@ -118,14 +126,15 @@ button:hover {
 }
 </style>
 </head>
-
 <body>
 
 <h2 style="position:fixed;top:10px;left:50%;transform:translateX(-50%);
-color:white;font-size:1.5em;opacity:0.8;">Dhani 💖 Baby</h2>
+color:white;font-size:1.5em;opacity:0.8;">प्यारे Dhani 💖 Baby</h2>
 
 <h1>💌 Baby, This Is Our Love Map</h1>
-<div class="subtitle">Click everything to unlock the final question 🗺️</div>
+<div class="subtitle" style="font-family:'Dancing Script', cursive;">
+Click everything to unlock the final question 🗺️
+</div>
 
 <div class="map">
   <button onclick="showMessage('ifUWant')">If U Want</button>
@@ -135,7 +144,7 @@ color:white;font-size:1.5em;opacity:0.8;">Dhani 💖 Baby</h2>
 </div>
 
 <div id="finalQuestion">
-  <h2>One last destination, baby…</h2>
+  <h2 style="font-family:'Dancing Script', cursive;">One last destination, baby…</h2>
   <h1>Will you be my Valentine? 💕</h1>
   <button id="yesBtn" onclick="yes()">YES 😍</button>
   <button id="noBtn">No 😢</button>
@@ -145,42 +154,40 @@ color:white;font-size:1.5em;opacity:0.8;">Dhani 💖 Baby</h2>
   <div id="popupContent"></div>
 </div>
 
-<!-- Background Song (will play after first click) -->
+<!-- Background Music -->
 <audio id="bgMusic" src="https://p.scdn.co/mp3-preview/7de802e1d4de2c6a62e99c58f5f5c927cb66c72e?cid=774b29d4f13844c495f206cafdad9c86" loop></audio>
 
 <script>
 let opened = 0;
 
-// LOVE MAP MESSAGES
+// MESSAGES
+const messages = {
+  ifUWant: "I know you would never let that go, but I DID WANT to talk to u. I just suck at words sometimes, babe.",
+  findingAgain: "I like to think part of the universe's grand (dumbass) plan is for us to meet again. I will never regret this, sweetheart, whatever the outcome.",
+  cantSayWords: "I know we can't say it, even though we obviously feel that way. But I somehow find it endearing that we have created other ways to say the words. It feels more sincere. Also your sign language skills? 10/10 hahaha",
+  promoDeal: "If you say yes to the question below, you have unlimited access to tease me about my jurrasic ass, the sorry guy meme and 100 kisses ;)"
+};
+
 function showMessage(type) {
-  // Start music on first click (works on mobile)
+  // start music on first interaction
   document.getElementById("bgMusic").play().catch(()=>{});
 
-  const messages = {
-    ifUWant: "I know you would never let that go, but I DID WANT to talk to u. I just suck at words sometimes, babe.",
-    findingAgain: "I like to think part of the universe's grand (dumbass) plan is for us to meet again. I will never regret this, sweetheart, whatever the outcome.",
-    cantSayWords: "I know we can't say it, even though we obviously feel that way. But I somehow find it endearing that we have created other ways to say the words. It feels more sincere. Also your sign language skills? 10/10 hahaha",
-    promoDeal: "If you say yes to the question below, you have unlimited access to tease me about my jurrasic ass, the sorry guy meme and 100 kisses ;)"
-  };
-
-  document.getElementById("popupContent").innerHTML =
-    messages[type] + "<br><br><button onclick='closePopup()'>Close</button>";
+  document.getElementById("popupContent").innerHTML = messages[type] + "<br><br><button onclick='closePopup()'>Close</button>";
   document.getElementById("popup").style.display = "flex";
 
   opened++;
-  if (opened >= 4) {
+  if(opened >= 4){
     document.getElementById("finalQuestion").style.display = "block";
     spawnNoButton();
   }
 }
 
-function closePopup() {
+function closePopup(){
   document.getElementById("popup").style.display = "none";
 }
 
 // RUNAWAY NO BUTTON
 const noBtn = document.getElementById("noBtn");
-
 function spawnNoButton() {
   moveNo();
   document.addEventListener("mousemove", dodgeCursor);
@@ -195,66 +202,60 @@ function moveNo() {
   noBtn.style.top = y + "px";
 }
 
-function dodgeCursor(e) {
+function dodgeCursor(e){
   const rect = noBtn.getBoundingClientRect();
   const dx = e.clientX - (rect.left + rect.width/2);
   const dy = e.clientY - (rect.top + rect.height/2);
   const distance = Math.sqrt(dx*dx + dy*dy);
-
-  if (distance < 120) {
-    moveNo();
-  }
+  if(distance < 120){ moveNo(); }
 }
 
 // FLOATING HEARTS
-function spawnHearts() {
-  setInterval(() => {
+function spawnHearts(){
+  setInterval(()=>{
     const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = ["💖","💘","💕","💗","💓","💞","💝"][Math.floor(Math.random()*7)];
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (20 + Math.random()*30) + "px";
-    heart.style.animationDuration = (4 + Math.random()*4) + "s";
+    heart.className="heart";
+    heart.innerHTML=["💖","💘","💕","💗","💓","💞","💝","प्यार","साथ","बेब"][Math.floor(Math.random()*10)];
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(20+Math.random()*30)+"px";
+    heart.style.animationDuration=(4+Math.random()*4)+"s";
     document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 8000);
-  }, 300);
+    setTimeout(()=>heart.remove(),8000);
+  },300);
 }
 spawnHearts();
 
-// CONFESSION WHEN YES
-function yes() {
-  document.body.innerHTML = `
-  <div style="padding:40px;text-align:center;color:white;">
-    <h1 style="font-size:3em;">💖 Happy Valentine’s Day, Baby 💖</h1>
-    <p style="font-size:1.6em;">
-      sweetheart,<br><br>
-      What you and I have is irreplaceable. You have my heart and I promise to take care of yours. I like to think that the universe has a better sense of whatever is going on and it will all make sense someday. But for now, I have you and that's all I need to be happy. Happy Valentines Day, my love.
-    </p>
-  </div>
+// FINAL CONFESSION
+function yes(){
+  document.body.innerHTML=`
+    <div style="padding:40px;text-align:center;color:white;">
+      <h1 style="font-size:3em;">💖 Happy Valentine’s Day, Baby 💖</h1>
+      <p style="font-size:1.6em;">
+        sweetheart,<br><br>
+        What you and I have is irreplaceable. You have my heart and I promise to take care of yours. I like to think that the universe has a better sense of whatever is going on and it will all make sense someday. But for now, I have you and that's all I need to be happy. Happy Valentines Day, my love.
+      </p>
+    </div>
   `;
   confetti();
   spawnHearts();
 }
 
-// CONFETTI
-function confetti() {
+// CONFETTI EFFECT
+function confetti(){
   for(let i=0;i<200;i++){
-    let c = document.createElement("div");
+    let c=document.createElement("div");
     c.style.position="fixed";
     c.style.width="10px";
     c.style.height="10px";
     c.style.borderRadius="50%";
-    c.style.background = ["#ff165d","#fff","#ffd700","#ff69b4"][Math.floor(Math.random()*4)];
-    c.style.left = Math.random()*100+"%";
-    c.style.top = "-10px";
+    c.style.background=["#ff165d","#fff","#ffd700","#ff69b4"][Math.floor(Math.random()*4)];
+    c.style.left=Math.random()*100+"%";
+    c.style.top="-10px";
     document.body.appendChild(c);
 
-    let fall = setInterval(()=>{
-      c.style.top = (parseFloat(c.style.top)+3)+"px";
-      if(parseFloat(c.style.top) > window.innerHeight){
-        clearInterval(fall);
-        c.remove();
-      }
+    let fall=setInterval(()=>{
+      c.style.top=(parseFloat(c.style.top)+3)+"px";
+      if(parseFloat(c.style.top)>window.innerHeight){clearInterval(fall);c.remove();}
     },15);
   }
 }
