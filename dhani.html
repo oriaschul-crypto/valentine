@@ -8,7 +8,7 @@
 <style>
 body {
   background: radial-gradient(circle at top, #ffb6c1, #ff69b4, #ff1493);
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Times New Roman", serif;
   text-align: center;
   color: white;
   padding: 30px;
@@ -125,10 +125,10 @@ color:white;font-size:1.5em;opacity:0.8;">Dhani 💖 Baby</h2>
 <div class="subtitle">Click everything to unlock the final question 🗺️</div>
 
 <div class="map">
-  <button onclick="showMessage('first')">📍 When We First Met</button>
-  <button onclick="showMessage('reconnect')">🔁 Finding Each Other Again</button>
-  <button onclick="showMessage('why')">💖 Why I Love You</button>
-  <button onclick="showMessage('memes')">😂 Our Meme Bond</button>
+  <button onclick="showMessage('ifUWant')">If U Want</button>
+  <button onclick="showMessage('findingAgain')">Finding Each Other Again</button>
+  <button onclick="showMessage('cantSayWords')">We Can't Say The Words</button>
+  <button onclick="showMessage('promoDeal')">Promo Deal!</button>
 </div>
 
 <div id="finalQuestion">
@@ -142,16 +142,19 @@ color:white;font-size:1.5em;opacity:0.8;">Dhani 💖 Baby</h2>
   <div id="popupContent"></div>
 </div>
 
+<!-- Background Song -->
+<audio id="bgMusic" src="https://p.scdn.co/mp3-preview/7de802e1d4de2c6a62e99c58f5f5c927cb66c72e?cid=774b29d4f13844c495f206cafdad9c86" autoplay loop></audio>
+
 <script>
 let opened = 0;
 
 // LOVE MAP MESSAGES
 function showMessage(type) {
   const messages = {
-    first: "We dated years ago, and even back then you were unforgettable. You’ve always been special to me.",
-    reconnect: "We separated peacefully, but reconnecting with you felt like destiny giving us a second chance. I’m so glad it did.",
-    why: "Baby, you’re kind, funny, sexy, intelligent, and incredibly patient with me. I’ve never felt this connected to anyone else.",
-    memes: "We share memes like love letters. You’re literally my favorite person to laugh and be stupid with 😂",
+    ifUWant: "I know you would never let that go, but I DID WANT to talk to u. I just suck at words sometimes, babe.",
+    findingAgain: "I like to think part of the universe's grand (dumbass) plan is for us to meet again. I will never regret this, sweetheart, whatever the outcome.",
+    cantSayWords: "I know we can't say it, even though we obviously feel that way. But I somehow find it endearing that we have created other ways to say the words. It feels more sincere. Also your sign language skills? 10/10 hahaha",
+    promoDeal: "If you say yes to the question below, you have unlimited access to tease me about my jurrasic ass, the sorry guy meme and 100 kisses ;)"
   };
 
   document.getElementById("popupContent").innerHTML =
@@ -160,98 +163,5 @@ function showMessage(type) {
 
   opened++;
   if (opened >= 4) {
-    document.getElementById("finalQuestion").style.display = "block";
-    spawnNoButton();
-  }
-}
-
-function closePopup() {
-  document.getElementById("popup").style.display = "none";
-}
-
-// RUNAWAY NO BUTTON
-const noBtn = document.getElementById("noBtn");
-
-function spawnNoButton() {
-  moveNo();
-  document.addEventListener("mousemove", dodgeCursor);
-  noBtn.addEventListener("touchstart", moveNo);
-  noBtn.addEventListener("click", moveNo);
-}
-
-function moveNo() {
-  const x = Math.random() * (window.innerWidth - 150);
-  const y = Math.random() * (window.innerHeight - 80);
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-}
-
-function dodgeCursor(e) {
-  const rect = noBtn.getBoundingClientRect();
-  const dx = e.clientX - (rect.left + rect.width/2);
-  const dy = e.clientY - (rect.top + rect.height/2);
-  const distance = Math.sqrt(dx*dx + dy*dy);
-
-  if (distance < 120) {
-    moveNo();
-  }
-}
-
-// FLOATING HEARTS
-function spawnHearts() {
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = ["💖","💘","💕","💗","💓","💞","💝"][Math.floor(Math.random()*7)];
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (20 + Math.random()*30) + "px";
-    heart.style.animationDuration = (4 + Math.random()*4) + "s";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 8000);
-  }, 300);
-}
-spawnHearts();
-
-// CONFESSION WHEN YES
-function yes() {
-  document.body.innerHTML = `
-  <div style="padding:40px;text-align:center;color:white;">
-    <h1 style="font-size:3em;">💖 Happy Valentine’s Day, Baby 💖</h1>
-    <p style="font-size:1.6em;">
-      Dhani, reconnecting with you felt like destiny giving us a second chance.<br><br>
-      You’re my favorite person, my meme soulmate, and someone I deeply care about.<br><br>
-      I’m really happy you’re in my life again.
-    </p>
-    <p style="font-size:1.4em;">I love you, baby.</p>
-  </div>
-  `;
-  confetti();
-  spawnHearts();
-}
-
-// CONFETTI
-function confetti() {
-  for(let i=0;i<200;i++){
-    let c = document.createElement("div");
-    c.style.position="fixed";
-    c.style.width="10px";
-    c.style.height="10px";
-    c.style.borderRadius="50%";
-    c.style.background = ["#ff165d","#fff","#ffd700","#ff69b4"][Math.floor(Math.random()*4)];
-    c.style.left = Math.random()*100+"%";
-    c.style.top = "-10px";
-    document.body.appendChild(c);
-
-    let fall = setInterval(()=>{
-      c.style.top = (parseFloat(c.style.top)+3)+"px";
-      if(parseFloat(c.style.top) > window.innerHeight){
-        clearInterval(fall);
-        c.remove();
-      }
-    },15);
-  }
-}
-</script>
-
-</body>
-</html>
+    document.getElementById("finalQues
+    
