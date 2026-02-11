@@ -5,7 +5,7 @@
 <title>For Baby 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Google Font for cursive accents -->
+<!-- Cursive font for accents -->
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 
 <style>
@@ -21,7 +21,7 @@ body {
   position: relative;
 }
 
-/* Soft overlay for warmth and glow */
+/* Glow overlay */
 body::before {
   content: '';
   position: fixed;
@@ -34,7 +34,7 @@ body::before {
   z-index:0;
 }
 
-/* HEADINGS & SUBTITLE */
+/* HEADINGS */
 h1 {
   font-size: 3em;
   animation: pulse 2s infinite;
@@ -50,12 +50,12 @@ h2 {
   margin-bottom: 25px;
 }
 
-/* MAP BUTTONS */
+/* BUTTONS WITH ICONS */
 .map {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 18px;
-  max-width: 650px;
+  max-width: 700px;
   margin: auto;
 }
 
@@ -70,11 +70,19 @@ button {
   transition: 0.2s;
   position: relative;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button:hover {
   transform: scale(1.05);
   background: #ff003c;
+}
+
+button span.icon {
+  margin-right: 8px;
+  font-size: 1.3em;
 }
 
 /* POPUP */
@@ -122,7 +130,7 @@ button:hover {
   position: absolute;
 }
 
-/* HEART ANIMATIONS */
+/* HEART ANIMATION */
 @keyframes floatHearts {
   0% { transform: translateY(0) scale(0.8); opacity: 0; }
   50% { opacity: 1; }
@@ -152,14 +160,14 @@ color:white;font-size:1.5em;opacity:0.8;">प्यारे Dhani 💖 Baby</h2
 
 <h1>💌 Baby, This Is Our Love Map</h1>
 <div class="subtitle" style="font-family:'Dancing Script', cursive;">
-Click everything to unlock the final question 🗺️
+Click each button to unlock the final question 🗺️
 </div>
 
 <div class="map">
-  <button onclick="showMessage('ifUWant')">If U Want</button>
-  <button onclick="showMessage('findingAgain')">Finding Each Other Again</button>
-  <button onclick="showMessage('cantSayWords')">We Can't Say The Words</button>
-  <button onclick="showMessage('promoDeal')">Promo Deal!</button>
+  <button onclick="showMessage('ifUWant')"><span class="icon">🗨️</span>If U Want</button>
+  <button onclick="showMessage('findingAgain')"><span class="icon">🌌</span>Finding Each Other Again</button>
+  <button onclick="showMessage('cantSayWords')"><span class="icon">🤟❤️</span>We Can't Say The Words</button>
+  <button onclick="showMessage('promoDeal')"><span class="icon">😘🖼️</span>Promo Deal!</button>
 </div>
 
 <div id="finalQuestion">
@@ -173,13 +181,12 @@ Click everything to unlock the final question 🗺️
   <div id="popupContent"></div>
 </div>
 
-<!-- Background Music -->
+<!-- Background music -->
 <audio id="bgMusic" src="https://p.scdn.co/mp3-preview/7de802e1d4de2c6a62e99c58f5f5c927cb66c72e?cid=774b29d4f13844c495f206cafdad9c86" loop></audio>
 
 <script>
 let opened = 0;
 
-// BUTTON MESSAGES
 const messages = {
   ifUWant: "I know you would never let that go, but I DID WANT to talk to u. I just suck at words sometimes, babe.",
   findingAgain: "I like to think part of the universe's grand (dumbass) plan is for us to meet again. I will never regret this, sweetheart, whatever the outcome.",
@@ -187,12 +194,10 @@ const messages = {
   promoDeal: "If you say yes to the question below, you have unlimited access to tease me about my jurrasic ass, the sorry guy meme and 100 kisses ;)"
 };
 
-// SHOW MESSAGE & START MUSIC
-function showMessage(type) {
+function showMessage(type){
   document.getElementById("bgMusic").play().catch(()=>{});
   document.getElementById("popupContent").innerHTML = messages[type] + "<br><br><button onclick='closePopup()'>Close</button>";
   document.getElementById("popup").style.display = "flex";
-
   opened++;
   if(opened >= 4){
     document.getElementById("finalQuestion").style.display = "block";
@@ -206,14 +211,14 @@ function closePopup(){
 
 // RUNAWAY NO BUTTON
 const noBtn = document.getElementById("noBtn");
-function spawnNoButton() {
+function spawnNoButton(){
   moveNo();
   document.addEventListener("mousemove", dodgeCursor);
   noBtn.addEventListener("touchstart", moveNo);
   noBtn.addEventListener("click", moveNo);
 }
 
-function moveNo() {
+function moveNo(){
   const x = Math.random() * (window.innerWidth - 150);
   const y = Math.random() * (window.innerHeight - 80);
   noBtn.style.left = x + "px";
@@ -228,7 +233,7 @@ function dodgeCursor(e){
   if(distance < 120){ moveNo(); }
 }
 
-// FLOATING HEARTS + HINDI WORDS
+// FLOATING HEARTS
 function spawnHearts(){
   setInterval(()=>{
     const heart = document.createElement("div");
@@ -270,7 +275,6 @@ function confetti(){
     c.style.left=Math.random()*100+"%";
     c.style.top="-10px";
     document.body.appendChild(c);
-
     let fall=setInterval(()=>{
       c.style.top=(parseFloat(c.style.top)+3)+"px";
       if(parseFloat(c.style.top)>window.innerHeight){clearInterval(fall);c.remove();}
