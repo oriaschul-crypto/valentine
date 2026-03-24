@@ -48,21 +48,10 @@
       animation: fadeIn 1.8s ease forwards;
     }
 
-    .flower {
-      width: 16px;
-      height: 16px;
-      background: #d96a7b;
-      border-radius: 50%;
-      display: inline-block;
-      margin: 3px;
-    }
-
-    .stem {
-      width: 4px;
-      height: 60px;
-      background: #4a7a5a;
-      margin: 0 auto;
-      border-radius: 2px;
+    .bouquet img {
+      width: 220px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
     }
 
     @keyframes fadeIn {
@@ -76,6 +65,9 @@
       line-height: 1.6;
       opacity: 0;
       transition: opacity 2s ease;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .show {
@@ -106,23 +98,13 @@
   <button onclick="showBouquet()">open</button>
 
   <div class="bouquet" id="bouquet">
-    <!-- simple carnation-style cluster -->
-    <div>
-      <div class="flower"></div><div class="flower"></div><div class="flower"></div>
-    </div>
-    <div>
-      <div class="flower"></div><div class="flower"></div><div class="flower"></div><div class="flower"></div>
-    </div>
-    <div>
-      <div class="flower"></div><div class="flower"></div><div class="flower"></div>
-    </div>
-    <div class="stem"></div>
+    <img src="https://images.unsplash.com/photo-1597848212624-e8d3b5d3b4b5" alt="Carnation bouquet">
   </div>
 
   <div class="message" id="message">
-    these are for you<br>
-    i wanted to give you something, even like this<br>
-    looking forward to tonight with you
+    you're really making it hard for me to give you actual flowers.<br>
+    but until then, have these instead.<br>
+    i love you.
   </div>
 
   <script>
@@ -130,7 +112,6 @@
       document.getElementById('bouquet').style.display = 'block';
       document.getElementById('message').classList.add('show');
 
-      // subtle ambient particles
       for (let i = 0; i < 10; i++) {
         const light = document.createElement('div');
         light.classList.add('light');
